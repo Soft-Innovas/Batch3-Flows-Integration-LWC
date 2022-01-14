@@ -1,0 +1,33 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 01-11-2022
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-card title="Bubbles=true and composed=true">
+        <div onsenddata={handleSendDataParent1}>
+            <div onsenddata={handleSendDataParent2}>
+                <c-lwc-event-child-one></c-lwc-event-child-one>
+            </div>
+        </div>
+    </lightning-card>
+    
+    <lightning-card title="Bubbles=true and composed=false">
+        <div onsenddata={handleSendDataParent1}>
+            <div onsenddata={handleSendDataParent2}>
+                <c-lwc-event-child-two></c-lwc-event-child-two>
+            </div>
+        </div>
+    </lightning-card>
+    
+    <lightning-card title="Bubbles=false">
+        <div onsenddata={handleSendDataParent1}>
+            <div onsenddata={handleSendDataParent2}>
+                <c-lwc-event-child-three></c-lwc-event-child-three>
+                <c-lwc-event-child></c-lwc-event-child>
+            </div>
+        </div>
+    </lightning-card>
+</template>

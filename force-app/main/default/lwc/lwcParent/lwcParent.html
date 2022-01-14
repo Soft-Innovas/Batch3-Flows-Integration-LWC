@@ -1,0 +1,33 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 01-06-2022
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-card title="PARENT LWC">
+        <lightning-button
+            label="Run queryselector"
+            onclick={handleClick}
+            variant="brand"
+        ></lightning-button>
+        <p >
+            We are inside lwcParent 2
+        </p>
+        <p class="greencolor">
+            We are inside lwcParent
+        </p>
+        <p id="Sara" data-firstname="Sara">
+            We are inside lwcParent 3
+        </p>
+        <p data-firstname="Sara">
+            We are inside lwcParent 4
+        </p>
+        <template if:true={showChild}>
+            <c-lwc-child
+                message-in-child="This message is from parent component"
+            ></c-lwc-child>
+        </template>
+    </lightning-card>
+</template>

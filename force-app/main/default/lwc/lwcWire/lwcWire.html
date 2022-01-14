@@ -1,0 +1,25 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 01-02-2022
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-card title="LWC WIRE NO PARAMETERS IN CACHE">
+        <template if:true={accounts.data}>
+            <template 
+                for:each={accounts.data} 
+                for:item="account" 
+                for:index="index"
+            >
+                <p key={account.Id}>
+                    Name: {account.Name}, Type: {account.Type}, State: {account.BillingState}, Phone: {account.Phone}
+                </p>
+            </template>
+        </template>
+        <template if:true={accounts.error}>
+            {accounts.error}
+        </template>
+    </lightning-card>
+</template>
