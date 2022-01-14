@@ -1,0 +1,35 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 01-06-2022
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-card title="LWC LOOP">
+        LWC for:each
+        <template for:each={contacts} for:item="contact" for:index="index">
+            <p data-name="rowname" key={contact.ContactId}>Index: {index}; FirstName:{contact.FirstName}, LastName:{contact.LastName}</p>
+            <!-- <p  data-name="rowname">Sara</p>
+            <p  data-name="rowname">Liz</p>
+            <p  data-name="rowname">Ajinkya</p> -->
+
+        </template>
+        <br/>
+        -------------------------------------------------------
+        <br/>
+        LWC iterator
+        <template iterator:contact={contacts}>
+            <p key={contact.value.ContactId}>
+                Index: {contact.index}; FirstName: {contact.value.FirstName}, LastName: {contact.value.LastName}
+                <template if:true={contact.first}>
+                    => This is the first entry
+                </template>
+                <template if:true={contact.last}>
+                    => This is the last entry
+                </template>
+            </p>
+        </template>
+    </lightning-card>
+</template>
+

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <isExposed>true</isExposed>
+    <masterLabel>LMS Matrix</masterLabel>
+    <description>This channel will be used to send and received data of Matrix</description>
+    <lightningMessageFields>
+        <fieldName>MovieId</fieldName>
+        <description>Movie Id field</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>Name</fieldName>
+        <description>Name of the movie</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>iMDB</fieldName>
+        <description>IMDB rating</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>ReleaseDate</fieldName>
+        <description>Scheduled release date for the movie</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>Director</fieldName>
+        <description>Director of the Matrix movie</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>SourceOfData</fieldName>
+        <description>This will have value VF or AURA or LWC</description>
+    </lightningMessageFields>
+</LightningMessageChannel>

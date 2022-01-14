@@ -1,0 +1,29 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 12-31-2021
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-card title="Decorators">
+        Object data=>
+        <br/>
+        FirstName: {contact.FirstName}&emsp;LastName: {contact.LastName}
+        <br/><br/>
+        Primitive data (String) =>
+        <br/>
+        Message: {message}
+        <br/><br/>
+        Value from Get: {FullName}
+        <br/><br/><br/>
+
+        <lightning-button 
+            variant="brand" 
+            label="Change properties' values" 
+            title="Change properties' values" 
+            onclick={handleClick} 
+            class="slds-var-m-left_x-small"
+        ></lightning-button>
+    </lightning-card>
+</template>

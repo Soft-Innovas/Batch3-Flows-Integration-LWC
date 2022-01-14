@@ -1,0 +1,24 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 01-14-2022
+  @last modified by  : Deepak Pal
+-->
+<template>
+   <lightning-card title="LWC Subscriber">
+        <lightning-button 
+            label="Subscribe"
+            onclick={handleSubscribe}
+            variant="neutral"
+        ></lightning-button>
+        <br/>
+        <lightning-button 
+            label="Unsubscribe"
+            onclick={handleUnsubscribe}
+            variant="brand"
+        ></lightning-button>
+        <br/>
+        {movieData}
+   </lightning-card>
+</template>

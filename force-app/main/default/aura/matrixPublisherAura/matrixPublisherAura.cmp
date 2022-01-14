@@ -1,0 +1,21 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 01-14-2022
+  @last modified by  : Deepak Pal
+-->
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+    <lightning:messageChannel 
+        type="MatrixMovieData__c"
+        aura:id="matrixMovieDataId"
+    ></lightning:messageChannel>
+
+    <lightning:card title="Aura Publisher">
+        <lightning:button
+            label="Publish"
+            onclick="{!c.publishMovieData}"
+        ></lightning:button>
+    </lightning:card>
+    
+</aura:component>	

@@ -1,0 +1,46 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 01-14-2022
+  @last modified by  : Deepak Pal
+-->
+<apex:page >
+    <apex:includeScript value="/sforce/one/52.0/api.js"></apex:includeScript>
+    <apex:includeScript value="/soap/ajax/52.0/connection.js"></apex:includeScript>
+    <apex:includeScript value="/soap/ajax/52.0/apex.js"></apex:includeScript>
+
+    <apex:slds />
+
+    <div>
+        <p>Publish your moviedata from VF</p>
+        <br/>
+        <button onclick="publishMessageChannel()">Publish</button>
+    </div>
+
+    <script>
+        
+        //alert('Loading Channel in VF Pubs');
+        let MOVIE_DATA_CHANNEL = "{!$MessageChannel.MatrixMovieData__c}";
+        function publishMessageChannel(){
+            let matrixData = {
+                MovieId: 'matrix',
+                Name : 'The Matrix Resurrections',
+                iMDB : 5.7,
+                ReleaseDate : '22 March 2022',
+                Director : 'Lana Wachowski',
+                MovieData: {
+                    MovieId: 'matrix',
+                    Name : 'The Matrix Resurrections',
+                    iMDB : 5.7,
+                    ReleaseDate : '22 March 2022',
+                    Director : 'Lana Wachowski'
+                },
+                SourceOfData:'VF Publisher'
+            };
+            //alert('the movie matrix event wil now be fired from VF');
+            sforce.one.publish(MOVIE_DATA_CHANNEL, matrixData);
+        }
+    </script>
+
+</apex:page>

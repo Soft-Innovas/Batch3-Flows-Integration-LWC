@@ -1,0 +1,39 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 01-05-2022
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-card title="LWC Imperative GET">
+        <lightning-input
+            label="Enter Search keyword"
+            onchange={handleSearchKeyword}
+            placeholder="Search"
+            
+        ></lightning-input>
+        <lightning-button
+            variant="brand"
+            title="Get Accounts"
+            label="Get Accounts"
+            onclick={handleGetAccountsByKeyword}
+            class="slds-var-m-left_x-small"
+        ></lightning-button>
+        <br/>
+        <template if:true={accounts}>
+            <template 
+                for:each={accounts} 
+                for:item="account" 
+                for:index="index"
+            >
+                <p key={account.Id}>
+                    Name: {account.Name}, Type: {account.Type}, State: {account.BillingState}, Phone: {account.Phone}
+                </p>
+            </template>
+        </template>
+        <template if:true={error}>
+            {error}
+        </template>
+    </lightning-card>
+</template>
