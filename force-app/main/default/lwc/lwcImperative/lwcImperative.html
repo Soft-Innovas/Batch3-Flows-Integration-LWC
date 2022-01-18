@@ -1,0 +1,22 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 10-21-2021
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-card title="Apex Imperative" >
+        <div class="slds-var-m-around_small">
+            <lightning-button label="Get Opportunities" onclick={handleLoad}></lightning-button>
+        </div>
+        <template class="slds-var-p-around_small" if:true={opportunities}>
+            <template for:each={opportunities} for:item="opp">
+                <p key={opp.id}>Name: {opp.Name}, Stage:{opp.StageName}</p>
+            </template>
+        </template>
+        <template if:true={error}>
+            <p>Error retreiving the opportunities</p>
+        </template>
+    </lightning-card>
+</template>

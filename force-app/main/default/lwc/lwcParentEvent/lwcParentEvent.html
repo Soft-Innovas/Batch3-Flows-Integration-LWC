@@ -1,0 +1,24 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 10-24-2021
+  @last modified by  : Deepak Pal
+-->
+<template>
+    This is parent component for catching the events
+    <br/>
+    Received information:
+    <br/>
+    First name: {firstName}
+    <br/>
+    Last name: {lastName}
+    <br/>
+    Email: {email}
+    <br/>
+    ----------Parent-child boundary--------------------
+    <c-lwc-child-event 
+        onfetchcontact={handleChildButtonClick}
+    ></c-lwc-child-event>
+    
+</template>

@@ -1,0 +1,45 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 11-28-2021
+  @last modified by  : Deepak Pal
+-->
+<aura:component  implements="flexipage:availableForAllPageTypes, flexipage:availableForRecordHome">
+
+    <aura:attribute name="recordValue" type="String" />
+    
+    
+    <lightning:messageChannel
+        type="MyMessageChannel__c"
+        aura:id="MyMessageChannel"
+        onMessage="{!c.handlePayload}"
+        scope="APPLICATION"
+    />
+    
+    
+    
+    <lightning:card 
+        title="Aura Component"
+        footer="Aura component"
+    >
+
+    <lightning:button 
+        label="Send Payload"
+        variant="brand"
+        onclick="{!c.sendPayload}"
+    />
+
+    <textarea
+        id="receivedMessageTextArea"
+        class="textareaReceivedMessage"
+        rows="7"
+        disabled="true"
+      >
+        {!v.recordValue}
+      </textarea>
+
+    </lightning:card>
+
+    <c:helloWorld />
+</aura:component>	

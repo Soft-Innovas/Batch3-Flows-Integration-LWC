@@ -1,0 +1,30 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 10-31-2021
+  @last modified by  : Deepak Pal
+-->
+<apex:page lightningStylesheets="true">
+    <apex:includeScript value="/sforce/one/52.0/api.js"></apex:includeScript>
+    <apex:includeScript value="/soap/ajax/52.0/connection.js"></apex:includeScript>
+    <apex:includeScript value="/soap/ajax/52.0/apex.js"></apex:includeScript>
+
+    <apex:slds />
+
+    <div>
+        <p>Publish message from VF</p>
+        <br/>
+        <button onclick="publishToMessageChannel()" >Publish</button>
+    </div>
+    <script>
+        var SAMPLEMSGCHL = "{!$MessageChannel.SampleMessageChannel__c}";
+        function publishToMessageChannel(){
+            const payload = {
+                detail:"This is published inside VF",
+                source:"SampleMessagePublisher.page"
+            };
+            sforce.one.publish(SAMPLEMSGCHL, payload);
+        }
+    </script>
+</apex:page>

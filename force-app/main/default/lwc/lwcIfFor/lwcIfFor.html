@@ -1,0 +1,57 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 10-17-2021
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <div class="myColor">
+        <lightning-input 
+            type="checkbox" 
+            label="Toggle text" 
+            value={showTrueSection} 
+            onchange={setSectionStatus}
+        ></lightning-input>
+        <br/>
+        <template if:true={showTrueSection}>
+            This will be shown on TRUE value
+        </template>
+        <template if:false={showTrueSection}>
+            This will be shown on False value
+        </template>
+    </div>
+    ------------Here ends Toggle------
+    <br/>
+    Below is FOR:EACH
+    <br/>
+    <div class="myColor">
+        For
+        <template for:each={accounts} for:item="acc" for:index="index">
+            <p key={acc.AccountId}>At index={index}, Name= {acc.Name} and Location= {acc.Location}</p>
+        </template>
+
+        <!-- 
+            <p key="1">Name= "Google" and Location= "California"</p>
+            <p key="2">Name= "Facebook" and Location= "Palo Alto"</p>
+            <p key="3">Name= "Microsoft" and Location= "San Fransisco"</p>
+         -->
+    </div>
+    ------------Here ends for each ------
+    <br/>
+    Below is Iterator
+    <br/>
+    <div class="myColor">
+        <template iterator:acc={accounts}>
+            <p key={acc.AccountId}>
+                <template if:true={acc.first}>
+                    First record=>
+                </template>
+                <template if:true={acc.last}>
+                    Last record=>
+                </template>
+                At the index={acc.index}, Name= {acc.value.Name}, Location={acc.value.Location}
+            </p>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,33 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 10-18-2021
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-card title="ApexWire" >
+        <lightning-input 
+            type="search" 
+            onchange={handleInputChange} 
+            label="Search"
+            value={searchTerm}
+        ></lightning-input>
+        <lightning-button 
+            variant="base" 
+            label="Search" 
+            title="Search" 
+            onclick={handleClick} 
+            class="slds-var-m-left_x-small"
+        ></lightning-button>
+
+        <template if:true={contacts.data}>
+            <template for:each={contacts.data} for:item="contact">
+                <p key={contact.Id}>{contact.Name}</p>
+            </template>
+        </template>
+        <template if:true={contacts.error}>
+            <p>{contacts.error}</p>
+        </template>
+    </lightning-card>
+</template>

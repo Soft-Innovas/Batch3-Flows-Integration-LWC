@@ -1,0 +1,37 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 10-28-2021
+  @last modified by  : Deepak Pal
+-->
+<template>
+    This is parent component
+    <br/>
+    -----------------------------------
+    <lightning-input 
+        label="Enter the text"
+        value={primitiveString}
+        onchange={handleTextChange}
+    ></lightning-input>
+    <br/>
+    ---------------------------------------
+    <br/>
+    <c-lwc-child-prim-non-prim
+        public-property={primitiveString}
+    ></c-lwc-child-prim-non-prim>
+    <!-- load public-property was success
+    load public-property-object was failure=>no further loading -->
+    <br/>
+    <c-lwc-child-prim-non-prim
+        public-property=true
+    ></c-lwc-child-prim-non-prim>
+    <br/>
+    ------------------------------
+    <br/>
+    -------------------------------
+    <br/>
+    <c-lwc-child-prim-non-prim
+        public-property-object={contactRec}
+    ></c-lwc-child-prim-non-prim>
+</template>

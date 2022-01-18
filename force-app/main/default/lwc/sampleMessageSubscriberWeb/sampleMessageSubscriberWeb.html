@@ -1,0 +1,21 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 10-31-2021
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-card title="LWC Subscriber" footer="LWC Subscriber">
+        <p>Message Channel: SampleMessageChannel</p>
+        <lightning-button label="Subscribe" variant="brand" onclick={handleSubscribe}></lightning-button>
+        &nbsp; &nbsp;
+        <lightning-button label="Unscubscribe" variant="neutral" onclick={handleUnsubscribe}></lightning-button>
+
+        <br/>
+        <p>Received Message: </p>
+        <textarea id="messageArea" style="width:100%;" rows="7">
+            {payload}
+        </textarea>
+    </lightning-card>
+</template>

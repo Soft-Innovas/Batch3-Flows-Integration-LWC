@@ -1,0 +1,25 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 11-13-2021
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-card title="DataTable demo">
+        <template if:true={showTable}>
+            <div>
+                <lightning-datatable
+                    key-field="Id"
+                    data={tableData}
+                    columns={columns}
+                    onrowselection={handleSelectedRow}
+                    onsave={handleSave}
+                ></lightning-datatable>
+            </div>
+        </template>
+        <template if:false={showTable}>
+            <p>No information to load on table</p>
+        </template>
+    </lightning-card>
+</template>

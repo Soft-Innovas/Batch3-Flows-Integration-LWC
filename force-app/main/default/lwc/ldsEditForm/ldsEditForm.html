@@ -1,0 +1,32 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 11-04-2021
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-card title="LDS EDIT FORM">
+        <lightning-record-edit-form
+            object-api-name={objectApiName}
+            record-id={recordId}
+            onsubmit={handleSubmit}
+            onsuccess={handleSuccess}
+        >
+        <lightning-messages></lightning-messages>
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-input-field field-name={nameField}></lightning-input-field>
+                <lightning-input-field field-name={emailField}></lightning-input-field>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-input-field field-name={companyField}></lightning-input-field>
+                <lightning-input-field field-name={sourceField}></lightning-input-field>
+            </div>
+        </div>
+        <div class="slds-var-m-top_medium">
+            <lightning-button type="submit" variant="brand" label="Save"></lightning-button>
+        </div>
+        </lightning-record-edit-form>
+    </lightning-card>
+</template>

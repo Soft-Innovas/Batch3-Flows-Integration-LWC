@@ -1,0 +1,33 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 10-20-2021
+  @last modified by  : Deepak Pal
+-->
+<template>
+    
+    <lightning-card title="ApexWireMethod">
+        <lightning-input 
+            type="search"
+            label="Enter keyword"
+            value={searchTerm}
+            onchange={handleKeywordChange}
+        ></lightning-input>
+        <!-- <lightning-button
+            label="Search"
+            variant="brand"
+            onclick={handleAccountSearch}
+            class="slds-var-m-left_x-small"
+        ></lightning-button> -->
+        <template if:true={accounts}> 
+            <template for:each={accounts} for:item="account">
+                <p key={account.Id}>{account.Name}</p>
+            </template>
+        </template>
+        <template if:true={error}>
+            <p>Status: {error.status}</p>
+            <p>Message: {errorMessage}</p>
+        </template>
+    </lightning-card>
+</template>

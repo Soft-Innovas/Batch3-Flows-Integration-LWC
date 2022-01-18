@@ -1,0 +1,27 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 10-23-2021
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-card id="sampleId" data-id="sampleid" title="Composition">
+        <div class="greenBackground">
+            This is a text from parent (from HTML)
+        </div>
+        <br/>
+        <lightning-button
+            label="Click me for selector"
+            onclick={handleOnclick}
+            variant="brand"
+        ></lightning-button>
+        ---------------------------------
+        <br/>C0
+        <!-- This is call to child component -->
+        <c-lwc-composition-child information="Override (From parent the string has been passed)">
+            C1=>C21
+        </c-lwc-composition-child>
+        <c-lwc-child></c-lwc-child>C22
+    </lightning-card>
+</template>

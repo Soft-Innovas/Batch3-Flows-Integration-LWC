@@ -1,0 +1,50 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 11-07-2021
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-card title="Create Record LDS">
+        <lightning-input 
+            type="text" 
+            label="Name"
+            value={name}
+            onchange={handleNameChange} 
+            required="true"
+        ></lightning-input>
+        <br/>
+        <lightning-combobox 
+            name="stage"
+            label="Stage"
+            value={stageName}
+            placeholder="Select opportunity stage"
+            options={stageOptions}
+            required="true"
+            onchange={handleStageNameChange}
+            
+        ></lightning-combobox>
+        <br/>
+        <lightning-input 
+            type="date" 
+            name="closeDate" 
+            label="Close Date" 
+            value={closeDate}
+            required="true"
+            min={todayDate}
+            message-when-range-underflow="Date cannot be in the past"
+            onchange={handleCloseDateChange}
+        ></lightning-input>
+        <br/>
+        <div class="slds-var-p-around_small">
+            <lightning-button 
+                variant="brand" 
+                label="Create Opportunity"
+                title="createOpp"
+                onclick={handleCreateOpp}
+                class="slds-var-m-left_x-small"
+            ></lightning-button>
+        </div>
+    </lightning-card>
+</template>

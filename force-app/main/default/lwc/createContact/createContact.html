@@ -1,0 +1,31 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 10-21-2021
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <div class="slds-p-around--large">
+        <div class="slds-col slds-size_2-of-3">
+
+            <lightning-input 
+            label="Enter first name" 
+            value={firstName}
+            onchange={handleFirstNameChange}
+        ></lightning-input>
+        </div>
+        <lightning-input 
+            label="Enter last name"
+            value={lastName}
+            onchange={handleLastNameChange}
+        ></lightning-input>
+
+        <div class="slds-p-top_medium">
+            <lightning-button 
+                label="Upsert contact"
+                onclick={upsertContact}
+            ></lightning-button>
+        </div>
+    </div>
+</template>
