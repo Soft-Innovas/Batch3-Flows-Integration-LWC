@@ -1,0 +1,26 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 12-31-2021
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-card title="LWC IF">
+        <template if:true={showSection}>
+            <p id="paratrue">This will be displayed on showSection = TRUE</p>
+        </template>
+        <template if:false={showSection}>
+            <p id="parafalse">This will be displayed on showSection = FALSE</p>
+        </template>
+        <br/>
+        
+        <lightning-button 
+            variant="brand" 
+            label="Toggle section" 
+            title="Toggle section" 
+            onclick={handleClick} 
+            class="slds-var-m-left_x-small"
+        ></lightning-button>
+    </lightning-card>
+</template>

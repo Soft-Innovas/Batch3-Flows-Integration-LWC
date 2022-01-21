@@ -2,23 +2,23 @@
   @description       : 
   @author            : Deepak Pal
   @group             : 
-  @last modified on  : 11-03-2021
+  @last modified on  : 01-15-2022
   @last modified by  : Deepak Pal
 -->
 <template>
-    <lightning-card title="LDS Demo">
-        <lightning-record-view-form 
+    <lightning-card title="LDS VIEW FORM">
+        <lightning-record-view-form
             record-id={recordId}
             object-api-name={objectApiName}
         >
             <div class="slds-grid">
                 <div class="slds-col slds-size_1-of-2">
-                    <lightning-output-field field-name={nameField}></lightning-output-field>
-                    <lightning-output-field field-name={emailField}></lightning-output-field>
+                    <lightning-output-field field-name="Name"></lightning-output-field>
+                    <lightning-output-field field-name="Phone"></lightning-output-field>
                 </div>
                 <div class="slds-col slds-size_1-of-2">
-                    <lightning-output-field field-name={companyField}></lightning-output-field>
-                    <lightning-output-field field-name={sourceField}></lightning-output-field>
+                    <lightning-output-field field-name="Email"></lightning-output-field>
+                    <lightning-output-field field-name="Title"></lightning-output-field>
                 </div>
             </div>
         </lightning-record-view-form>

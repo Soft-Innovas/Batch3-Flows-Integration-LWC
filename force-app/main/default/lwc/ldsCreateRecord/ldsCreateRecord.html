@@ -2,49 +2,58 @@
   @description       : 
   @author            : Deepak Pal
   @group             : 
-  @last modified on  : 11-07-2021
+  @last modified on  : 01-21-2022
   @last modified by  : Deepak Pal
 -->
 <template>
-    <lightning-card title="Create Record LDS">
+    <lightning-card title="LDS CREATE OPPORTUNITY">
         <lightning-input 
-            type="text" 
-            label="Name"
-            value={name}
-            onchange={handleNameChange} 
+            type="text"
+            label="Opportunity Name"
+            onchange={handleNameChange}
             required="true"
+            name="name"
+            message-when-value-missing="Please enter opportunity name"
         ></lightning-input>
         <br/>
-        <lightning-combobox 
+        <lightning-combobox
             name="stage"
             label="Stage"
-            value={stageName}
-            placeholder="Select opportunity stage"
-            options={stageOptions}
+            onchange={handleStageChange}
+            options={optionsStage}
             required="true"
-            onchange={handleStageNameChange}
-            
+            placeholder="Select Stage"
+            message-when-value-missing="Please select opportunity stage"
         ></lightning-combobox>
         <br/>
-        <lightning-input 
+        <lightning-input
             type="date" 
-            name="closeDate" 
-            label="Close Date" 
-            value={closeDate}
+            name="closeDate"
+            label="Close Date"
             required="true"
-            min={todayDate}
-            message-when-range-underflow="Date cannot be in the past"
             onchange={handleCloseDateChange}
+            message-when-value-missing="Please enter opportunity close date"
         ></lightning-input>
         <br/>
-        <div class="slds-var-p-around_small">
-            <lightning-button 
-                variant="brand" 
-                label="Create Opportunity"
-                title="createOpp"
-                onclick={handleCreateOpp}
-                class="slds-var-m-left_x-small"
-            ></lightning-button>
-        </div>
+        <lightning-input 
+            name="amount"
+            label="Amount"
+            formatter="currency" 
+            step="0.01"
+            type="number"
+            required="true"
+            onchange={handleAmountChange}
+            placeholder="Enter amount upto 2 decimals"
+            message-when-step-mismatch="Only 2 decimals are allowed"
+            message-when-value-missing="Please enter opportunity amount"
+        ></lightning-input>
+        <br/>
+        <lightning-button 
+            variant="brand"
+            label="Create Opportunity"
+            title="createOpp"
+            onclick={handleCreateOpp}
+            class="slds-var-m-around_x-small"
+        ></lightning-button>
     </lightning-card>
 </template>

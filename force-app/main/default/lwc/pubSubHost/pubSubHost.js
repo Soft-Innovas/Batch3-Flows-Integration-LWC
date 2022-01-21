@@ -2,44 +2,74 @@
  * @description       : 
  * @author            : Deepak Pal
  * @group             : 
- * @last modified on  : 11-28-2021
+ * @last modified on  : 01-12-2022
  * @last modified by  : Deepak Pal
 **/
+//accounts
+//account
+//accounts.add(account)
 
-var callbacks = {};
-//callbacks['csvupload'] = [handlecsvbycmp1, handlecsvbycmp2];
-//callbacks['imageupload'] = [handleimgbycmp1, handleimgbycmp2, handleimgbycmp3]
+var subscribers = {};
 
-const register = (eventName, callback) => {
-    if (!callbacks[eventName]) {
-        callbacks[eventName] = new Set(); //initilizes 'btnclick' as a set; now this set will hold set of methods that should be invoked when btnclick is fired
+const register = (movieName, subscriberFunction) => { //M3 or M4 M5
+    //matrix => movieName
+    //subscribers['matrix'] => undefined => !undefined=  true
+    //if (subscribers[movieName] === undefined) {
+    alert('We are registering for Matrix');
+    if (!subscribers[movieName]) {
+        //create a new set for 'matrix'
+        alert('Creating entry for Matrix')
+        subscribers[movieName] = new Set();
     }
-    callbacks[eventName].add(callback);
-    //callbacks['btnclick'].add(123.handleClickEvent);
-};
+    //the below will always have movieName defined
+    alert('Adding handleMovieData in the subscriber list');
+    subscribers[movieName].add(subscriberFunction);
+}
 
-const unregister = (eventName, callback) => {
-    if (callbacks[eventName]) {
-        callbacks[eventName].delete(callback);
+const unregister = (movieName, subscriberFunction) => {
+    if (subscribers[movieName]) {
+        //check if matrix movieName is store in the channel
+        //if yes delete user Liz from the list
+        subscribers[movieName].delete(subscriberFunction);
     }
-};
+}
 
 const unregisterAll = () => {
-    callbacks = {};
-};
+    //reset channel
+    subscribers = {};
+}
 
-const fire = (eventName, payload) => {
-    if (callbacks[eventName]) {
-        callbacks[eventName].forEach(callback => { //handleClickEvent of subscriber
+const fire = (movieName, payload) => {
+    if (subscribers[movieName]) {
+        alert('Entry for matrix exists');
+        subscribers[movieName].forEach(subscriberFunction => {
             try {
-                callback(payload); //handleClickEvent(payload)
+                alert('invoking handleMovieData after this');
+                subscriberFunction(payload);
             } catch (error) {
                 console.log(JSON.stringify(error));
             }
-            //123.handleclick(payload);
-            //456.handleclick(payload);
         });
     }
-};
+}
 
-export default { register, unregister, fire , unregisterAll};
+export {register, unregister, unregisterAll, fire};
+
+// subscribers = {
+//     'matrix': [M3, M4, M5]
+// };
+
+// var subscribers = {
+//     'matrix': [
+//         'Begench.handleMovieData'
+//     ]
+// }; 
+
+//Begench is at 123
+//Liz is at 456
+//Maral is at 789
+
+//The object contains list of movies for which people have subscribed
+//'matrix':['Deepak', 'Maral'];
+//'venom':['Deepak', 'Liz'];
+//'doctorstrange':['Begench', 'Emir','Servet'];

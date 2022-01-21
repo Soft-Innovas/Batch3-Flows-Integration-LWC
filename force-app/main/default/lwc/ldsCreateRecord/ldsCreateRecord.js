@@ -2,125 +2,116 @@
  * @description       : 
  * @author            : Deepak Pal
  * @group             : 
- * @last modified on  : 11-29-2021
+ * @last modified on  : 01-21-2022
  * @last modified by  : Deepak Pal
 **/
-import { LightningElement, wire, track, api } from 'lwc';
+import { LightningElement, wire } from 'lwc';
+import { getPicklistValues } from 'lightning/uiObjectInfoApi';
+import { createRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { NavigationMixin } from 'lightning/navigation';
-import { createRecord } from 'lightning/uiRecordApi';
-import NAME_FIELD from '@salesforce/schema/Opportunity.Name';
-import STAGE_NAME from '@salesforce/schema/Opportunity.StageName';
-import CLOSE_DATE from '@salesforce/schema/Opportunity.CloseDate';
 import OPPORTUNITY_OBJECT from '@salesforce/schema/Opportunity';
-import { getPicklistValues } from 'lightning/uiObjectInfoApi';
-
-
-const name = 'dsvhsdbv';
+import NAME_FIELD from '@salesforce/schema/Opportunity.Name';
+import STAGE_FIELD from '@salesforce/schema/Opportunity.StageName';
+import CLOSE_DATE_FIELD from '@salesforce/schema/Opportunity.CloseDate';
+import AMOUNT_FIELD from '@salesforce/schema/Opportunity.Amount';
 
 export default class LdsCreateRecord extends NavigationMixin(LightningElement) {
-    name;
-    stageName;
-    closeDate;
-    todayDate;
+    oppName;
+    oppStage;
+    oppCloseDate;
+    oppAmount;
 
+    optionsStage;
 
-    @track stageOptions;
-
-    connectedCallback() {
-        let today = new Date();
-        let dd = String(today.getDate()).padStart(2, '0');
-        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        let yyyy = today.getFullYear();
-
-        this.todayDate = mm + '/' + dd + '/' + yyyy;
-    }
-
-    @wire(getPicklistValues, { recordTypeId: '012000000000000AAA', fieldApiName: STAGE_NAME })
-    stageNamePicklistInfo({ error, data }) {
+    /*
+    optionsStage = [
+        {label:"Prospecting", value:"Prospecting"}
+    ];
+    */
+    //fetch picklist by MASTER if no record type present
+    @wire(getPicklistValues, { recordTypeId: '012000000000000AAA', fieldApiName: STAGE_FIELD })
+    getStageName({ data, error }) {
         if (data) {
-            console.log('Data : ', JSON.stringify(data));
-            this.stageOptions = [];
-            for (let i = 0; i < data.values.length; i++){
-                let stage = data.values[i];
-                this.stageOptions.push({label: stage.label, value: stage.value});
-            }
+            console.log('STage Name: ', JSON.stringify(data));
+            this.optionsStage = [];
+            data.values.forEach(stage => {
+                this.optionsStage.push({
+                    label: stage.label,
+                    value: stage.value
+                })
+            });
+
         } else if (error) {
-            console.log('error : ', JSON.stringify(error));
+            console.log('Error while fetching Stage Name');
         }
     }
 
     handleNameChange(event) {
-        this.name = event.detail.value;
+        console.log('Name: ', event.detail.value);
+        this.oppName = event.detail.value;
     }
 
-    handleStageNameChange(event) {
-        this.stageName = event.detail.value;
+    handleStageChange(event) {
+        console.log('Stage: ', event.detail.value);
+        this.oppStage = event.detail.value;
     }
 
     handleCloseDateChange(event) {
-        this.closeDate = event.detail.value;
+        console.log('Close Date: ', event.detail.value);
+        this.oppCloseDate = event.detail.value;
     }
 
-    handleCreateOpp(event) {
+    handleAmountChange(event) {
+        console.log('Amount: ', event.detail.value);
+        this.oppAmount = event.detail.value;
+    }
+
+    handleCreateOpp() {
         if (!this.validityCheck()) {
             return;
         }
-        
-        //external API hitting SF
-        //it provides field values=> integrationRecord
         const fields = {};
-        fields[NAME_FIELD.fieldApiName] = this.name; //integrationRecord.name
-        fields[STAGE_NAME.fieldApiName] = this.stageName; //integrationRecord.stageName
-        fields[CLOSE_DATE.fieldApiName] = this.closeDate; //integrationRecord.closeDate
+        fields[NAME_FIELD.fieldApiName] = this.oppName;
+        fields[STAGE_FIELD.fieldApiName] = this.oppStage;
+        fields[CLOSE_DATE_FIELD.fieldApiName] = this.oppCloseDate;
+        fields[AMOUNT_FIELD.fieldApiName] = this.oppAmount;
         const oppRecord = { apiName: OPPORTUNITY_OBJECT.objectApiName, fields };
+
         createRecord(oppRecord)
-            .then(opportunityRecord => {
-                this.showNotification('SUCCESS', 'Opportunity created successfully','success');
-                this.navigateToRecordViewPage(opportunityRecord.id);
+            .then(oppRecord => { 
+                console.log('oppRecord: ', oppRecord);
+                this.showNotification('SUCCESS', 'Opportunity created with Id: ' + oppRecord.id, 'success');
+                this.navigateToRecordPage(oppRecord.id);
             })
             .catch(error => {
-                this.showNotification('ERROR', 'Opportunity creation failed','error');
-                console.log('Error: ', JSON.stringify(error));
+                console.log('Errors: ', JSON.stringify(error));
+                this.showNotification('ERROR', JSON.stringify(error), 'error');
             })
+    }
+
+    validityCheck() {
+        const allValid = [
+            ...this.template.querySelectorAll(
+                'lightning-input, lightning-combobox'
+            )
+        ].reduce((validSoFar, inputCmp) => { 
+            inputCmp.reportValidity();
+            return validSoFar && inputCmp.checkValidity();
+        }, true);
+        return allValid;
     }
 
     showNotification(title, message, variant) {
         const evt = new ShowToastEvent({
             title: title,
             message: message,
-            variant: variant,
+            variant: variant
         });
         this.dispatchEvent(evt);
     }
 
-    validityCheck() {
-        const allValid = [
-            ...this.template.querySelectorAll(
-                'lightning - input, lightning - combobox, lightning - radio - group'
-            )
-        ];
-        const allValidInputs = [
-            ...this.template.querySelectorAll('lightning-input'), //inputCmp = input[1]
-        ].reduce((validSoFar, inputCmp) => {
-            inputCmp.reportValidity();
-            return validSoFar && inputCmp.checkValidity();
-        }, true);
-        const allValidPicklists = [
-            ...this.template.querySelectorAll('lightning-combobox'),
-        ].reduce((validSoFar, inputCmp) => {
-            inputCmp.reportValidity();
-            return validSoFar && inputCmp.checkValidity();
-        }, true);
-        if (!allValidInputs || !allValidPicklists) {
-            alert('Please fix the issues');
-            return false;
-        }
-        return true;
-    }
-
-    navigateToRecordViewPage(recordId) {
-        // View a custom object record.
+    navigateToRecordPage(recordId) {
         this[NavigationMixin.Navigate]({
             type: 'standard__recordPage',
             attributes: {
@@ -129,11 +120,5 @@ export default class LdsCreateRecord extends NavigationMixin(LightningElement) {
             }
         });
     }
-
-    get isCreated() {
-        if (this.recordId) {
-            return true;
-        }
-        return false;
-    }
+    
 }

@@ -2,30 +2,51 @@
   @description       : 
   @author            : Deepak Pal
   @group             : 
-  @last modified on  : 10-21-2021
+  @last modified on  : 01-10-2022
   @last modified by  : Deepak Pal
 -->
 <template>
-    <div class="slds-p-around--large">
-        <div class="slds-col slds-size_2-of-3">
-
-            <lightning-input 
-            label="Enter first name" 
-            value={firstName}
-            onchange={handleFirstNameChange}
-        ></lightning-input>
+    <lightning-card title="Add a new contact">
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-1">
+                <lightning-input 
+                    type="text" 
+                    label="First Name" 
+                    placeholder="Enter first name" 
+                    onchange={handleFirstNameChange}
+                ></lightning-input>
+            </div>
+            <div class="slds-col slds-size_6-of-6">
+                <lightning-input 
+                    type="text" 
+                    label="Last Name" 
+                    placeholder="Enter last name" 
+                    message-when-value-missing="Please enter last name"
+                    required="true"
+                    onchange={handleLastNameChange}
+                ></lightning-input>
+            </div>
+            <div class="slds-col slds-size_12-of-12">
+                <lightning-input 
+                    type="tel" 
+                    label="Phone" 
+                    name="phone" 
+                    placeholder="123-123-1234" 
+                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                    message-when-pattern-mismatch="Please enter number in 123-123-1234 format"
+                    onchange={handlePhoneChange}
+                    autocomplete="true"
+                ></lightning-input>
+            </div>
+            <div class="slds-col slds-size_12-of-12">
+                <lightning-button 
+                    variant="brand" 
+                    label="Create Contact" 
+                    title="create contact" 
+                    onclick={handleCreateContact} 
+                    class="slds-var-m-left_x-small"
+                ></lightning-button>
+            </div>
         </div>
-        <lightning-input 
-            label="Enter last name"
-            value={lastName}
-            onchange={handleLastNameChange}
-        ></lightning-input>
-
-        <div class="slds-p-top_medium">
-            <lightning-button 
-                label="Upsert contact"
-                onclick={upsertContact}
-            ></lightning-button>
-        </div>
-    </div>
+    </lightning-card>
 </template>

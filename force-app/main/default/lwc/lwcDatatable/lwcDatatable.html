@@ -1,25 +1,18 @@
+<!-- sldsValidatorIgnore -->
 <!--
   @description       : 
   @author            : Deepak Pal
   @group             : 
-  @last modified on  : 11-13-2021
+  @last modified on  : 01-21-2022
   @last modified by  : Deepak Pal
 -->
 <template>
-    <lightning-card title="DataTable demo">
-        <template if:true={showTable}>
-            <div>
-                <lightning-datatable
-                    key-field="Id"
-                    data={tableData}
-                    columns={columns}
-                    onrowselection={handleSelectedRow}
-                    onsave={handleSave}
-                ></lightning-datatable>
-            </div>
-        </template>
-        <template if:false={showTable}>
-            <p>No information to load on table</p>
-        </template>
+    <lightning-card title="DATA TABLE">
+        <lightning-datatable 
+            columns={columns}
+            data={data}
+            key-field="id"
+            onrowselection={handleRowSelection}
+        ></lightning-datatable>
     </lightning-card>
 </template>

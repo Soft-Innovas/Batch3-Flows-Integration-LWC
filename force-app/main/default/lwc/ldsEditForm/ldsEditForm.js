@@ -2,39 +2,32 @@
  * @description       : 
  * @author            : Deepak Pal
  * @group             : 
- * @last modified on  : 11-04-2021
+ * @last modified on  : 01-15-2022
  * @last modified by  : Deepak Pal
 **/
 import { LightningElement, api } from 'lwc';
-import NAME_FIELD from '@salesforce/schema/Lead.Name';
-import EMAIL_FIELD from '@salesforce/schema/Lead.Email';
-import SOURCE_FIELD from '@salesforce/schema/Lead.LeadSource';
-import COMPANY_FIELD from '@salesforce/schema/Lead.Company';
-
+import NAME_FIELD from '@salesforce/schema/Contact.Name';
+import LEAD_SOURCE_FIELD from '@salesforce/schema/Contact.LeadSource';
+import PHONE_FIELD from '@salesforce/schema/Contact.Phone';
+import BIRTHDATE_FIELD from '@salesforce/schema/Contact.Birthdate';
+import MAILING_ADDRESS from '@salesforce/schema/Contact.MailingAddress';
 
 export default class LdsEditForm extends LightningElement {
     @api recordId;
-    @api objectApiName = "Lead";
-    
+    @api objectApiName;
+
     nameField = NAME_FIELD;
-    emailField = EMAIL_FIELD;
-    sourceField = SOURCE_FIELD;
-    companyField = COMPANY_FIELD;
+    phoneField = PHONE_FIELD;
+    leadSourceField = LEAD_SOURCE_FIELD;
+    birthdateField = BIRTHDATE_FIELD;
+    mailingAddress = MAILING_ADDRESS;
 
-    handleSubmit(event) {
-        const recordDetail = event.detail.fields;
-        
-        console.log(JSON.stringify(recordDetail));
-        
-        // recordDetail.LeadSource = 'Other';
-        // this.template.querySelector('lightning-record-edit-form').submit(recordDetail);
+    handleSubmit() {
+        alert('The record is about to submitted');
     }
 
-    handleSuccess(event) {
-        const eventData = {
-            success: true
-        };
-        let newCustomEvent = new CustomEvent('recordsave', { detail: eventData });
-        this.dispatchEvent(newCustomEvent);
+    handleSuccess() {
+        alert('LDS the record has been created');
     }
+
 }

@@ -1,0 +1,60 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 01-16-2022
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading" size="medium" variant="brand"></lightning-spinner>
+    </template>
+    <!--cardTitle will be "Create" OR "View" OR "Edit" depending on the record lifecycle -->
+    <lightning-card title={cardTitle}>
+        <!-- For Create record-id must be blank and for view and edit use the Id created while creation -->
+        <template if:true={showEditForm}>
+            <lightning-record-edit-form
+                record-id={recordId}
+                object-api-name={objectApiName}
+                onsuccess={handleSuccess}
+                onsubmit={handleSubmit}
+            >
+                <lightning-messages></lightning-messages>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-1">
+                        <lightning-input-field field-name={subjectField}></lightning-input-field>
+                        <lightning-input-field field-name={accountField}></lightning-input-field>
+                        <lightning-input-field field-name={descriptionField}></lightning-input-field>
+                    </div>
+                </div>
+                <div class="slds-var-m-top_medium">
+                    <template if:true={recordId}>
+                        <lightning-button variant="brand" label="Cancel" onclick={handleCancel} ></lightning-button>
+                        <lightning-button type="submit" label="Save"></lightning-button>
+                    </template>
+                    <template if:false={recordId}>
+                        <lightning-button type="submit" label="Create Case"></lightning-button>
+                    </template>
+                </div>
+            </lightning-record-edit-form>
+        </template>
+        <template if:false={showEditForm}>
+            <lightning-record-view-form
+                record-id={recordId}
+                object-api-name={objectApiName}
+            >
+                <lightning-messages></lightning-messages>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-1">
+                        <lightning-output-field field-name={subjectField}></lightning-output-field>
+                        <lightning-output-field field-name={accountField}></lightning-output-field>
+                        <lightning-output-field field-name={descriptionField}></lightning-output-field>
+                    </div>
+                </div>
+                <div class="slds-var-m-top_medium">
+                    <lightning-button variant="brand" label="Edit" onclick={handleEdit}></lightning-button>
+                </div>
+            </lightning-record-view-form>
+        </template>
+    </lightning-card>
+</template>

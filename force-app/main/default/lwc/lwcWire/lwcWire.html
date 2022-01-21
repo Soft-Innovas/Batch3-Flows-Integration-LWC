@@ -2,32 +2,24 @@
   @description       : 
   @author            : Deepak Pal
   @group             : 
-  @last modified on  : 10-18-2021
+  @last modified on  : 01-02-2022
   @last modified by  : Deepak Pal
 -->
 <template>
-    <lightning-card title="ApexWire" >
-        <lightning-input 
-            type="search" 
-            onchange={handleInputChange} 
-            label="Search"
-            value={searchTerm}
-        ></lightning-input>
-        <lightning-button 
-            variant="base" 
-            label="Search" 
-            title="Search" 
-            onclick={handleClick} 
-            class="slds-var-m-left_x-small"
-        ></lightning-button>
-
-        <template if:true={contacts.data}>
-            <template for:each={contacts.data} for:item="contact">
-                <p key={contact.Id}>{contact.Name}</p>
+    <lightning-card title="LWC WIRE NO PARAMETERS IN CACHE">
+        <template if:true={accounts.data}>
+            <template 
+                for:each={accounts.data} 
+                for:item="account" 
+                for:index="index"
+            >
+                <p key={account.Id}>
+                    Name: {account.Name}, Type: {account.Type}, State: {account.BillingState}, Phone: {account.Phone}
+                </p>
             </template>
         </template>
-        <template if:true={contacts.error}>
-            <p>{contacts.error}</p>
+        <template if:true={accounts.error}>
+            {accounts.error}
         </template>
     </lightning-card>
 </template>

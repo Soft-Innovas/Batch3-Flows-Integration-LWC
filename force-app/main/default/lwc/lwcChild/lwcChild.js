@@ -2,16 +2,15 @@
  * @description       : 
  * @author            : Deepak Pal
  * @group             : 
- * @last modified on  : 10-17-2021
+ * @last modified on  : 01-06-2022
  * @last modified by  : Deepak Pal
 **/
-
 import { LightningElement, api } from 'lwc';
 
 export default class LwcChild extends LightningElement {
-    @api strVar = 'This is from child component';
+    @api messageInChild = 'This message is of Child component';
 
-    get countryName() {
-        return 'USA';
+    @api handleParentCall(message) {
+        console.log('Received from Parent component: ', message);
     }
 }

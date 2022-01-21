@@ -1,0 +1,73 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 01-08-2022
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-card title="Leads Wire Property">
+        <template if:true={leads}> 
+            <template if:true={leads.data}>
+                Below are the list of leads:
+                <br/>
+                <template for:each={leads.data} for:item="lead" for:index="index">
+                    <p key={lead.Id}>Lead at Index: {index}</p>
+                    <p key={lead.Id}>Name: {lead.Name}</p>
+                    <p key={lead.Id}>AnnualRevenue: {lead.AnnualRevenue}</p>
+                    <p key={lead.Id}>Email: {lead.Email}</p>
+                    <p key={lead.Id}>Phone: {lead.Phone}</p>
+                    <p key={lead.Id}>--------------------------------------------</p>
+                </template>
+            </template>
+            <template if:true={leads.error}>
+                Error occured: {leads.error.body.message}
+                <br/>
+                Stack trace: {leads.error.body.stackTrace}
+            </template>
+        </template>
+    </lightning-card>
+    <br/>
+    **************************************************************************************************
+    <br/>
+    <lightning-card title="Leads Wire Function"> 
+        <template if:true={leadsData}>
+            Below are the list of leads :
+            <br/>
+            <template for:each={leadsData} for:item="lead" for:index="index">
+                <p key={lead.Id}>Lead at Index: {index}</p>
+                <p key={lead.Id}>Name: {lead.Name}</p>
+                <p key={lead.Id}>AnnualRevenue: {lead.AnnualRevenue}</p>
+                <p key={lead.Id}>Email: {lead.Email}</p>
+                <p key={lead.Id}>Phone: {lead.Phone}</p>
+                <p key={lead.Id}>--------------------------------------------</p>
+            </template>
+        </template>
+        <template if:true={leadsError}>
+            Error occured: {leadsError.body.message}
+            <br/>
+            Stack trace: {leadsError.body.stackTrace}
+        </template>
+    </lightning-card>
+    **************************************************************************************************
+    <br/>
+    <lightning-card title="Leads Imperative"> 
+        <template if:true={leadsResult}>
+            Below are the list of leads :
+            <br/>
+            <template for:each={leadsResult} for:item="lead" for:index="index">
+                <p key={lead.Id}>Lead at Index: {index}</p>
+                <p key={lead.Id}>Name: {lead.Name}</p>
+                <p key={lead.Id}>AnnualRevenue: {lead.AnnualRevenue}</p>
+                <p key={lead.Id}>Email: {lead.Email}</p>
+                <p key={lead.Id}>Phone: {lead.Phone}</p>
+                <p key={lead.Id}>--------------------------------------------</p>
+            </template>
+        </template>
+        <template if:true={leadsCatch}>
+            Error occured: {leadsCatch.body.message}
+            <br/>
+            Stack trace: {leadsCatch.body.stackTrace}
+        </template>
+    </lightning-card>
+</template>

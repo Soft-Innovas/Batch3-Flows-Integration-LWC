@@ -1,0 +1,43 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 01-19-2022
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-card title="Picklist dependency">
+        <lightning-combobox 
+            name="recordType"
+            label="Record Type"
+            placeholder="Select record type"
+            options={optionsRecordType}
+            onchange={handleRecordTypeChange}
+        ></lightning-combobox>
+        <br/>
+        <lightning-combobox 
+            name="country"
+            label="Country"
+            placeholder="Select country"
+            options={optionsCountry}
+            onchange={handleCountryChange}
+        ></lightning-combobox>
+        <br/>
+        <lightning-combobox 
+            name="state"
+            label="State"
+            placeholder="Select state"
+            options={optionsState}
+            onchange={handleStateChange}
+        ></lightning-combobox>
+        <br/>
+        <lightning-combobox 
+            name="city"
+            label="City"
+            placeholder="Select city"
+            options={optionsCity}
+            onchange={handleCityChange}
+        ></lightning-combobox>
+
+    </lightning-card>
+</template>

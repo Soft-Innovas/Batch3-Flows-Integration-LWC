@@ -2,66 +2,78 @@
  * @description       : 
  * @author            : Deepak Pal
  * @group             : 
- * @last modified on  : 11-06-2021
+ * @last modified on  : 01-18-2022
  * @last modified by  : Deepak Pal
 **/
-import { LightningElement, track, api, wire } from 'lwc';
-import { getObjectInfo, getObjectInfos, getPicklistValues, getPicklistValuesByRecordType } from 'lightning/uiObjectInfoApi';
-import LEAD_OBJECT from '@salesforce/schema/Lead';
+import { LightningElement , wire } from 'lwc';
+import { getObjectInfo , getObjectInfos , getPicklistValues , getPicklistValuesByRecordType } from 'lightning/uiObjectInfoApi';
+import ACCOUNT_OBJECT from '@salesforce/schema/Account';
 import CONTACT_OBJECT from '@salesforce/schema/Contact';
-import LEAD_SOURCE_FIELD from '@salesforce/schema/Contact.LeadSource';
-import CITY_FIELD from '@salesforce/schema/Contact.City__c';
+import STATE_FIELD from '@salesforce/schema/Account.State__c';
+import COUNTRY_FIELD from '@salesforce/schema/Account.Country__c';
+import CITY_FIELD from '@salesforce/schema/Account.City__c';
 
 export default class LdsWireGet extends LightningElement {
-    @track objectInfoProperty;
-
-
-    @wire(getObjectInfo, { objectApiName: LEAD_OBJECT })
-    objectInfoFunction({ error, data }) {
+    @wire(getObjectInfo, { objectApiName: ACCOUNT_OBJECT })
+    getObjectInfoData({ data, error }) {
         if (data) {
-            this.objectInfoProperty = data;
-            // console.log('This is the object Info: ', JSON.stringify(data));
-            // console.log('This is the object Prefix: ', data.keyPrefix);
-            // console.log('This is the object Label: ', data.label);
-            
-            // console.log('This is the object\'s field: ', data.fields.AnnualRevenue);
+            console.log('getObjectInfo=>Account Info: ', JSON.stringify(data));
         } else if (error) {
-            
+            console.log('Error getObjectInfo: ', JSON.stringify(error));
         }
     }
 
-    @wire(getObjectInfos, { objectApiNames: [LEAD_OBJECT, CONTACT_OBJECT] })
-    objectInfosFunction({ error, data }) {
+    @wire(getObjectInfos, { objectApiNames: [CONTACT_OBJECT, ACCOUNT_OBJECT] })
+    getObjectInfosData({ data, error }){
         if (data) {
-            // console.log('This is the objects Info: ', JSON.stringify(data));
-            for (let i = 0; i < data.results.length; i++){
-                let objectInfo = data.results[i];
-                if (objectInfo.statusCode === 200) {
-                    let objectResult = objectInfo.result;
-                    // console.log('This is the object Prefix: ', objectResult.keyPrefix);
-                    // console.log('This is the object Label: ', objectResult.label);
-                }
-            }
+            console.log('getObjectInfos=>: ', JSON.stringify(data));
         } else if (error) {
-            
+            console.log('Error getObjectInfos: ', JSON.stringify(error));
+        }
+    }
+    //Below is for Master recordType
+    //@wire(getPicklistValues, { recordTypeId: '012000000000000AAA', fieldApiName: COUNTRY_FIELD })
+    //Below is for World recordType - replace the record type Id from your salesforce org
+    @wire(getPicklistValues, { recordTypeId: '0125j000000QGHQ', fieldApiName: COUNTRY_FIELD })
+    getCountryPicklist({ data, error }) {
+        if (data) {
+            console.log('Country Picklist=>: ', JSON.stringify(data));
+        } else if (error) {
+            console.log('Error State: ', JSON.stringify(error));
         }
     }
 
-    @wire(getPicklistValues, { recordTypeId: '012000000000000AAA', fieldApiName: CITY_FIELD })
-    picklistValueInfo({ error, data }) {
+    //Below is for Master recordType
+    //@wire(getPicklistValues, { recordTypeId: '012000000000000AAA', fieldApiName: STATE_FIELD })
+    //Below is for World recordType - replace the record type Id from your salesforce org
+    @wire(getPicklistValues, { recordTypeId: '0125j000000QGHQ', fieldApiName: STATE_FIELD })
+    getStatePicklist({ data, error }) {
         if (data) {
-            // console.log('This is the picklist Info: ', JSON.stringify(data));
+            console.log('State Picklist=>: ', JSON.stringify(data));
         } else if (error) {
-            // console.log('Error in picklist fetch: ', JSON.stringify(error));
+            console.log('Error State: ', JSON.stringify(error));
         }
     }
-
-    @wire(getPicklistValuesByRecordType, { objectApiName: CONTACT_OBJECT, recordTypeId: '0125j0000016lozAAA' })
-    picklistValueInfoByRecordType({ error, data }) {
+    
+    //Below is for Master recordType
+    //@wire(getPicklistValues, { recordTypeId: '012000000000000AAA', fieldApiName: CITY_FIELD })
+    //Below is for World recordType - replace the record type Id from your salesforce org
+    @wire(getPicklistValues, { recordTypeId: '0125j000000QGHQ', fieldApiName: CITY_FIELD })
+    getCityPicklist({ data, error }) {
         if (data) {
-            console.log('This is the picklist by RT Info: ', JSON.stringify(data));
+            console.log('City Picklist=>: ', JSON.stringify(data));
         } else if (error) {
-            console.log('Error in picklist by RT fetch: ', JSON.stringify(error));
+            console.log('Error State: ', JSON.stringify(error));
+        }
+    }
+    
+    //Below is for World recordType - replace the record type Id from your salesforce org
+    @wire(getPicklistValuesByRecordType, { objectApiName: ACCOUNT_OBJECT, recordTypeId: '0125j000000QGHQ'})
+    getCityPicklist({ data, error }) {
+        if (data) {
+            console.log('data of picklist by recordType Info=>: ', JSON.stringify(data));
+        } else if (error) {
+            console.log('Error: ', JSON.stringify(error));
         }
     }
 }

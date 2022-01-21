@@ -1,0 +1,38 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 01-02-2022
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-card title="LWC WIRE WITH PARAMETERS">
+        <lightning-input 
+            label="Enter Keyword"
+            placeholder="Search"
+            onchange={handleSearchKeyword}
+        ></lightning-input>
+        <lightning-button 
+            variant="brand" 
+            label="Get Accounts by Keyword" 
+            title="Get Accounts by Keyword" 
+            onclick={handleGetAccountsByKeyword} 
+            class="slds-var-m-left_x-small"
+        ></lightning-button>
+        
+        <template if:true={accounts.data}>
+            <template 
+                for:each={accounts.data} 
+                for:item="account" 
+                for:index="index"
+            >
+                <p key={account.Id}>
+                    Name: {account.Name}, Type: {account.Type}, State: {account.BillingState}, Phone: {account.Phone}
+                </p>
+            </template>
+        </template>
+        <template if:true={accounts.error}>
+            {accounts.error}
+        </template>
+    </lightning-card>
+</template>

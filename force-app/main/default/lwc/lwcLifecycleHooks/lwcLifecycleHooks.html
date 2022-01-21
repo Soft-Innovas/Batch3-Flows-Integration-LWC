@@ -1,0 +1,22 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 01-08-2022
+  @last modified by  : Deepak Pal
+-->
+<template>
+    {privateProperty}
+    <br/>
+    <lightning-input
+        label="Enter text"
+        placeholder="Enter text here"
+        onchange={handleChange}
+    ></lightning-input>
+
+    <lightning-input
+      type="checkbox"
+      label="Throw Error"
+      onchange={handleThrowError}
+    ></lightning-input>
+</template>

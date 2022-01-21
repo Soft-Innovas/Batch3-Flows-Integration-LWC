@@ -2,41 +2,37 @@
  * @description       : 
  * @author            : Deepak Pal
  * @group             : 
- * @last modified on  : 11-25-2021
+ * @last modified on  : 01-05-2022
  * @last modified by  : Deepak Pal
 **/
-import { LightningElement, track } from 'lwc';
-import getOpportunities from '@salesforce/apex/OpportunitiesImperative.getOpportunities';
-import saveOpportunities from '@salesforce/apex/OpportunitiesImperative.saveOpportunities';
-import sendOpportunitiesToAWS from '@salesforce/apex/OpportunitiesImperative.sendOpportunitiesToAWS';
+import { LightningElement } from 'lwc';
+import getAccountByKeyword from '@salesforce/apex/AccountController.getAccountByKeyword';
 
 export default class LwcImperative extends LightningElement {
-    @track
-    opportunities;
-
-    @track
+    accounts;
     error;
 
-    handleLoad() {
-        
-        getOpportunities()
-            .then(result => {
-                this.opportunities = result;
-                this.error = undefined;
-                saveOpportunities();
-            })
-            .then(result => {
-                this.opportunities = result;
-                this.error = undefined;
-                sendOpportunitiesToAWS();
-            })
-            .then(result => {
-                this.opportunities = result;
-                this.error = undefined;
-            })
-            .catch(error => {
-                this.opportunities = undefined;
-                this.error = error;
-            });
+    keywordJS = '';
+
+    handleSearchKeyword(event) {
+        this.keywordJS = event.detail.value;
+        console.log('label: ', event.detail.label);
+        console.log('keyword: ', this.keywordJS);
     }
+
+    handleGetAccountsByKeyword() {
+        getAccountByKeyword({ keyword: this.keywordJS })
+            .then((result) => {
+                this.accounts = result;
+                this.error = null;
+            })
+            .catch((error) => { 
+                this.accounts = null;
+                this.error = JSON.stringify(error);
+            })
+    
+        console.log('Hi there');
+    }
+
+    
 }

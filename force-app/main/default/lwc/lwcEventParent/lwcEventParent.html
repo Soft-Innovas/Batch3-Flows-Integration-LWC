@@ -1,0 +1,16 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 01-09-2022
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-card title="LWC Event Parent">
+        <!-- Below component call creates a memory, lets say '123456' -->
+        <!-- Inside child component the memory is refered by 'this' keyword -->
+        <c-lwc-event-child 
+            onmatrixresurrections={handleMatrixParent}
+        ></c-lwc-event-child>
+    </lightning-card>
+</template>
