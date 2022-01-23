@@ -1,0 +1,147 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 01-23-2022
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <div class="slds-box slds-var-m-around_x-small">
+        <h2><em>Company Information Screen</em></h2>
+    </div>
+    <div class="slds-box slds-var-m-around_x-small">
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-input 
+                    type="text" 
+                    label="Account Number"
+                    value={accountNumber}
+                    onchange={handleAccountNumberChange}
+                    class="slds-var-m-around_x-small"
+                    required="true"
+                    message-when-value-missing="Please enter account number"
+                ></lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-input 
+                    type="text" 
+                    label="Company Name"
+                    value={companyName}
+                    onchange={handleCompanyNameChange}
+                    required="true"
+                    maxlength="80"
+                    class="slds-var-m-around_x-small"
+                    message-when-value-missing="Please enter company name"
+                    message-when-too-long="Name cannot be more than 80 characters"
+                ></lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-input 
+                    type="number" 
+                    name="noOfEmployees" 
+                    label="No of Employees" 
+                    value={noOfEmployees}
+                    onchange={handleNoOfEmployeesChange}
+                    class="slds-var-m-around_x-small"
+                    min="1"
+                    message-when-range-underflow="No Of Employees must be a natural number (>1)"
+                    required="true"
+                    message-when-value-missing="Please enter the number employees in the company"
+                ></lightning-input>
+            </div>
+
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-input 
+                    type="number" 
+                    name="annualRevenue" 
+                    label="Annual Revenue" 
+                    value={annualRevenue} 
+                    formatter="currency" 
+                    step="0.01"
+                    onchange={handleAnnualRevenueChange}
+                    required="true"
+                    class="slds-var-m-around_x-small"
+                    message-when-value-missing="Please enter annual revenue"
+                ></lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-input 
+                    type="tel" 
+                    label="Phone" 
+                    name="phone" 
+                    value={phone}
+                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                    placeholder="Enter phone in 123-123-1234 format"
+                    onchange={handlePhoneChange}
+                    required="true"
+                    class="slds-var-m-around_x-small"
+                    message-when-value-missing="Please enter phone number"
+                    message-when-pattern-mismatch="Phone number should be in 123-123-1234 format"
+                ></lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-input 
+                    type="url" 
+                    label="Website" 
+                    name="website" 
+                    value={website}
+                    onchange={handleWebsiteChange}
+                    required="true"
+                    class="slds-var-m-around_x-small"
+                    message-when-value-missing="Please enter website"
+                ></lightning-input>
+            </div>
+
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-input 
+                    type="text" 
+                    label="SSN" 
+                    name="ssn" 
+                    value={ssn}
+                    pattern="[0-9]{3}-[0-9]{2}-[0-9]{4}"
+                    placeholder="Enter SSN in 111-11-1111 format"
+                    onchange={handleSSNChange}
+                    required="true"
+                    class="slds-var-m-around_x-small"
+                    message-when-value-missing="Please enter SSN"
+                    message-when-pattern-mismatch="SSN should be in 111-11-1111 format"
+                ></lightning-input>
+            </div>
+            <div class="slds-col slds-size_2-of-3 slds-var-m-around_x-small">
+                <lightning-input-address
+                    address-label="Company Address"
+                    street-label="Street"
+                    city-label="City"
+                    country-label="Country"
+                    province-label="State"
+                    postal-code-label="Zip Code"
+                    street={street}
+                    city={city}
+                    country={country}
+                    province={state}
+                    postal-code={zip}
+                    required="true"
+                    onchange={handleAddressChange}
+                ></lightning-input-address>
+            </div>
+        </div>
+    </div>
+    <div class="slds-box slds-var-m-around_x-small">
+        <lightning-button 
+            variant="brand" 
+            label="Save" 
+            title="save" 
+            onclick={handleCreateCompanyInformation} 
+            class="slds-var-m-around_x-small"
+        ></lightning-button> 
+        <template if:true={showNext}>
+            <lightning-button 
+                variant="neutral" 
+                label="Next" 
+                title="next" 
+                onclick={handleNextScreen} 
+                class="slds-var-m-around_x-small"
+            ></lightning-button> 
+        </template>
+    </div>
+</template>

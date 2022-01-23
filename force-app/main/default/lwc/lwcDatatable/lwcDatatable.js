@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Deepak Pal
  * @group             : 
- * @last modified on  : 01-21-2022
+ * @last modified on  : 01-22-2022
  * @last modified by  : Deepak Pal
 **/
 import { LightningElement } from 'lwc';
@@ -46,7 +46,7 @@ export default class LwcDatatable extends LightningElement {
             id: 'b',
             opportunityName: 'Quip',
             confidence: 0.78,
-            amount: 74000,
+            amount: 74000.897,
             contact: 'quipy@quip.com',
             phone: '9876654321',
             trendIcon: 'utility:up'
