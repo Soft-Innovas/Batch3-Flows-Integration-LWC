@@ -1,0 +1,35 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 12-24-2021
+  @last modified by  : Deepak Pal
+-->
+<apex:page controller="AddMultipleAccountsController" docType="html-5.0" >
+    <apex:form id="apexForm">
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                {!defaultPrint}
+            </apex:pageBlockSection>
+            <apex:pageBlockTable value="{!accountList}" var="acc">
+                <apex:column headerValue="Account Name">
+                    <apex:inputField value="{!acc.Name}"></apex:inputField>
+                </apex:column>
+                <apex:column headerValue="Account Number">
+                    <apex:inputField value="{!acc.AccountNumber}"/>
+                </apex:column>
+                <apex:column headerValue="Account Type">
+                    <apex:inputField value="{!acc.Type}"/>
+                </apex:column>
+                <apex:column headerValue="Industry">
+                    <apex:inputField value="{!acc.Industry}"/>
+                </apex:column>
+            </apex:pageBlockTable>
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Add one more account row" action="{!addAccount}"/>
+                <apex:commandButton value="Save Accounts" action="{!saveAccount}" />
+                <apex:commandButton value="Clear rows" action="{!clearAccount}" />
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

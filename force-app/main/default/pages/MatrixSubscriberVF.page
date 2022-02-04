@@ -1,0 +1,67 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 01-14-2022
+  @last modified by  : Deepak Pal
+-->
+<apex:page >
+    <apex:includeScript value="/sforce/one/52.0/api.js"></apex:includeScript>
+    <apex:includeScript value="/soap/ajax/52.0/connection.js"></apex:includeScript>
+    <apex:includeScript value="/soap/ajax/52.0/apex.js"></apex:includeScript>
+
+    <apex:slds />
+
+    <div>
+        <p>Subscribe to MatrixMovieData__c</p>
+        <button onclick="subscribeToMessageChannel()">Subscribe</button>
+        <div id="subscriptionMessage" style="color:red;"></div>
+        
+        <p>Unsubscribe to MatrixMovieData__c</p>
+        <button onclick="unsubscribeToMessageChannel()">Unsubscribe</button>
+        <div id="unsubscriptionMessage" style="color:red;"></div>
+    </div>
+    <div>
+        <textarea id="MCMessageTextArea" rows="10" style="width:100%"></textarea>
+    </div>
+
+    <script>
+        //alert('Loading Channel in VF Subs');
+        let MOVIE_DATA_CHANNEL = '{!$MessageChannel.MatrixMovieData__c}';
+        let subscriptionToMC;
+
+        function subscribeToMessageChannel(){
+            if(!subscriptionToMC){
+                //alert('Subscribing to Message channel in VF');
+                subscriptionToMC = sforce.one.subscribe(MOVIE_DATA_CHANNEL, onMCPublished);
+                var divAr = document.querySelector('#subscriptionMessage');
+                divAr.innerHTML = 'Subscription Successfull';
+                var divAr = document.querySelector('#unsubscriptionMessage');
+                divAr.innerHTML = '';
+                //alert('Subscription to Message channel in VF complete');
+            }
+        }
+
+        function unsubscribeToMessageChannel(){
+            if(subscriptionToMC){
+                //alert('Unsubscribing to Message channel in VF');
+                sforce.one.unsubscribe(subscriptionToMC);
+                subscriptionToMC == null;
+                var divAr = document.querySelector('#subscriptionMessage');
+                divAr.innerHTML = '';
+                var divAr = document.querySelector('#unsubscriptionMessage');
+                divAr.innerHTML = 'Unsubscription Successfull';
+                var textArea = document.querySelector('#MCMessageTextArea');
+                textArea.innerHTML = '';
+                //alert('Unsubscription to Message channel in VF complete');
+            }
+        }
+
+        function onMCPublished(payload){
+            //alert('Matrix movie event received');
+            var textArea = document.querySelector('#MCMessageTextArea');
+            textArea.innerHTML = payload ? JSON.stringify(payload) : 'No payload received';
+            //alert('Payload displayed');
+        }
+    </script>
+</apex:page>

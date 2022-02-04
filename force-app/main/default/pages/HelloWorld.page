@@ -1,0 +1,29 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 12-22-2021
+  @last modified by  : Deepak Pal
+-->
+<apex:page >
+    <apex:pageBlock title="User Status">
+        <apex:pageBlockSection >
+            Hi {! $User.FirstName } {! $User.LastName },
+        </apex:pageBlockSection>
+        <apex:pageBlockSection >
+            Your username is {! $User.UserName }
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    <apex:pageBlock title="User Role">
+        <apex:pageBlockSection >
+            Your Role is {! $UserRole.Name}
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    
+    
+    <apex:pageBlock title="Expressions">
+    	<p>
+            {! IF(CONTAINS($UserRole.Name, 'CFO'),'I am the CFO', 'I am not the CFO') }
+        </p>
+    </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,21 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 01-14-2022
+  @last modified by  : Deepak Pal
+-->
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+
+    <aura:attribute name="movieData" type="String" default=""/>
+
+    <lightning:messageChannel 
+        type="MatrixMovieData__c"
+        aura:id="matrixMovieDataSubscriberId"
+        onMessage="{!c.handleMovieData}"
+    ></lightning:messageChannel>
+
+    <lightning:card title="AURA Subscriber" >
+        {!v.movieData}
+    </lightning:card>
+</aura:component>	

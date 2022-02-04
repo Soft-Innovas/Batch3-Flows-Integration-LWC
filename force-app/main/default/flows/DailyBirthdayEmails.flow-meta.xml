@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Send an email to the contact who has the birthday today</description>
+        <name>SendBirthdayEmails</name>
+        <label>SendBirthdayEmails</label>
+        <locationX>50</locationX>
+        <locationY>396</locationY>
+        <actionName>Contact.Birthday_alerts</actionName>
+        <actionType>emailAlert</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>53.0</apiVersion>
+    <decisions>
+        <description>Check if the formula created for evaluating today=birthday is true</description>
+        <name>CheckIfTodayIsBirthday</name>
+        <label>CheckIfTodayIsBirthday</label>
+        <locationX>182</locationX>
+        <locationY>276</locationY>
+        <defaultConnectorLabel>Not Today</defaultConnectorLabel>
+        <rules>
+            <name>Today</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>IsBirthDayToday</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>SendBirthdayEmails</targetReference>
+            </connector>
+            <label>Today</label>
+        </rules>
+    </decisions>
+    <description>This flow will send emails to all the contacts on their birthdays</description>
+    <formulas>
+        <description>This formula will evaluate to true if today is the birthday</description>
+        <name>IsBirthDayToday</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(
+	DAY( {!$Record.Birthdate}) = DAY ( {!$Flow.CurrentDate} ),
+	MONTH({!$Record.Birthdate}) =  MONTH({!$Flow.CurrentDate})
+)</expression>
+    </formulas>
+    <interviewLabel>DailyBirthdayEmails {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>DailyBirthdayEmails</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>CheckIfTodayIsBirthday</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Birthdate</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>Contact</object>
+        <schedule>
+            <frequency>Daily</frequency>
+            <startDate>2021-12-10</startDate>
+            <startTime>09:10:00.000Z</startTime>
+        </schedule>
+        <triggerType>Scheduled</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

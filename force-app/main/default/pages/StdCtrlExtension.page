@@ -1,0 +1,35 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 12-24-2021
+  @last modified by  : Deepak Pal
+-->
+<apex:page standardController="Account" extensions="StandardControllerExtension">
+    <apex:form >
+        <apex:pageBlock mode="edit">
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{! save }" value="Save" />
+                <apex:commandButton action="{! cancel }" value="Cancel" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection >
+                <apex:outputField value="{! Account.Name }" />
+                <apex:outputField value="{! Account.AccountNumber }" />
+                <apex:inputField value="{! Account.Industry }" />
+                <apex:inputField value="{! Account.Type }" />
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <apex:pageBlock title="Contacts" id="contactList">
+            <!-- ct is every contact inside contacts -->
+            <table>
+                <apex:repeat value="{!contacts}" var="ct">
+                    <tr>
+                        <td>{!ct.FirstName}</td>
+                        <td>{!ct.LastName}</td>
+                        <td>{!ct.Email}</td>
+                    </tr>
+                </apex:repeat>  
+            </table>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

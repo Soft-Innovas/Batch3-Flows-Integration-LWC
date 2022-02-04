@@ -1,0 +1,10 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 12-22-2021
+  @last modified by  : Deepak Pal
+-->
+<apex:page>
+    <apex:pageBlock></apex:pageBlock>
+</apex:page>
