@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Rich Text Area</masterLabel>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property 
+                name="label" 
+                type="String"
+                label="Label"
+                required="true"
+                default="Label"
+                description="Enter label for rich text screen" 
+            ></property>
+            <property 
+                name="required" 
+                type="Boolean"
+                label="Require?"
+                required="true"
+                default="true"
+                description="Is the input required?" 
+            ></property>
+            <property 
+                name="fieldLevelHelp" 
+                type="String"
+                label="Help Text"
+                required="false"
+                description="Add some help text" 
+            ></property>
+            <property 
+                name="richTextVal" 
+                type="String"
+                label="Input Text Value"
+                required="false"
+                description="Add some help text" 
+            ></property>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

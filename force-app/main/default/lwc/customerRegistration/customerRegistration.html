@@ -1,0 +1,72 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 01-23-2022
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner alt="loading"></lightning-spinner>
+    </template>
+    <div class="slds-box slds-var-m-around_x-small">
+        <h2><em>Customer Screen</em></h2>
+    </div>
+    <div class="slds-box slds-var-m-around_x-small">
+        <lightning-record-edit-form 
+            record-id={recordId}
+            object-api-name={objectApiName}
+            onsubmit={handleSubmit}
+            onsuccess={handleSuccess}
+            onerror={handleError}
+        >
+            <lightning-messages></lightning-messages>
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-input-field field-name={name}></lightning-input-field>
+                    <lightning-input-field field-name={phone}></lightning-input-field>
+                    <lightning-input-field field-name={gender}></lightning-input-field>
+                    <lightning-input-field 
+                        field-name={companyInformation} 
+                        value={companyInformationId}
+                    ></lightning-input-field>
+                    <lightning-input-field field-name={street}></lightning-input-field>
+                    <lightning-input-field field-name={state}></lightning-input-field>
+                    <lightning-input-field field-name={country}></lightning-input-field>
+
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-input-field field-name={title}></lightning-input-field>
+                    <lightning-input-field field-name={birthdate}></lightning-input-field>
+                    <lightning-input-field field-name={email}></lightning-input-field>
+                    <lightning-input-field field-name={ssn}></lightning-input-field>
+                    <lightning-input-field field-name={department}></lightning-input-field>
+                    <lightning-input-field field-name={city}></lightning-input-field>
+                    <lightning-input-field field-name={zipCode}></lightning-input-field>
+                </div>
+            </div>
+            <div class="slds-var-m-around_medium">
+                <lightning-button 
+                    variant="neutral"
+                    label="Previous"
+                    onclick={handlePrevious}
+                    class="slds-var-m-around_x-small"
+                ></lightning-button>
+                <lightning-button 
+                    type="submit" 
+                    variant="brand"
+                    label="Save"
+                    class="slds-var-m-around_x-small"
+                ></lightning-button>
+                <template if:true={showNext}>
+                    <lightning-button 
+                        variant="neutral"
+                        label="Next"
+                        onclick={handleNext}
+                        class="slds-var-m-around_x-small"
+                    ></lightning-button>
+                </template>
+            </div>
+        </lightning-record-edit-form>
+    </div>
+</template>

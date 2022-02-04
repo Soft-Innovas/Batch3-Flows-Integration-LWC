@@ -1,0 +1,18 @@
+<!-- sldsValidatorIgnore -->
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 01-22-2022
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-card title="DATA TABLE">
+        <lightning-datatable 
+            columns={columns}
+            data={data}
+            key-field="id"
+            onrowselection={handleRowSelection}
+        ></lightning-datatable>
+    </lightning-card>
+</template>

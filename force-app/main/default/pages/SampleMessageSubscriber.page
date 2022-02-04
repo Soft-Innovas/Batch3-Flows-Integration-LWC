@@ -1,0 +1,62 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 10-31-2021
+  @last modified by  : Deepak Pal
+-->
+<apex:page>
+    <apex:includeScript value="/sforce/one/52.0/api.js"></apex:includeScript>
+    <apex:includeScript value="/soap/ajax/52.0/connection.js"></apex:includeScript>
+    <apex:includeScript value="/soap/ajax/52.0/apex.js"></apex:includeScript>
+
+    <apex:slds />
+
+    <div>
+        <p>Subcribe to SampleMessageChannel__c</p>
+        <button onclick="subscribeToMessageChannel()">Subscribe</button>
+        <div id="subscribeMessage" style="color:red;"></div>
+
+        <p>Unsubcribe to SampleMessageChannel__c</p>
+        <button onclick="unsubscribeToMessageChannel()">Unsubscribe</button>
+        <div id="unsubscribeMessage" style="color:red;"></div>
+    </div>
+
+        <textarea id="MCMessageTextArea" rows="10" style="width=100%;"></textarea>
+    <script>
+        var SAMPLEMSGCHL = "{!$MessageChannel.SampleMessageChannel__c}";
+
+        var subscribtionToMC;
+        function subscribeToMessageChannel(){
+            if(!subscribtionToMC){
+                debugger;
+                subscribtionToMC = sforce.one.subscribe(SAMPLEMSGCHL, onMCPublished);
+                var divAr = document.querySelector("#subscribeMessage");
+                divAr.innerHTML = 'Subscription successfull';
+                var divAr = document.querySelector("#unsubscribeMessage");
+                divAr.innerHTML = '';
+            }
+        }
+
+        function onMCPublished(message){
+            var textArea = document.querySelector("#MCMessageTextArea");
+            textArea.innerHTML = message ? JSON.stringify(message) : 'No message received';
+        }
+
+        function unsubscribeToMessageChannel(){
+            if(subscribtionToMC){
+                sforce.one.unsubscribe(subscribtionToMC);
+                subscribtionToMC = null;
+                var divAr = document.querySelector("#subscribeMessage");
+                divAr.innerHTML = '';
+                var divAr = document.querySelector("#unsubscribeMessage");
+                divAr.innerHTML = 'Unsubscription successful';
+                var textArea = document.querySelector("#MCMessageTextArea");
+                textArea.innerHTML = '';
+            }
+        }
+
+        subscribeToMessageChannel();
+
+    </script>
+</apex:page>

@@ -1,0 +1,26 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 10-28-2021
+  @last modified by  : Deepak Pal
+-->
+<template>
+    Below is primitive data=> 
+    <template if:true={showPublicProperty}>
+        public property: {publicProperty}
+    </template>
+    <template if:false={showPublicProperty}>
+        No public property
+    </template>
+    <br/>
+    ------------------------------------------------------------
+    <br/>
+    Below is object data=> 
+    <template if:true={showPublicPropertyObject}>
+        public property object: {publicPropertyObject.firstName} {publicPropertyObject.lastName}
+    </template>
+    <template if:false={showPublicPropertyObject}>
+        No public property object
+    </template>
+</template>

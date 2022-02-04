@@ -1,0 +1,19 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 10-23-2021
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-card title="Parent Component">
+        <lightning-button 
+            label="hide child component" 
+            onclick={toggleChild}
+        >
+        </lightning-button>
+        <template if:true={showChild}>
+            <c-lwc-disconnect-child></c-lwc-disconnect-child>
+        </template>
+    </lightning-card>
+</template>

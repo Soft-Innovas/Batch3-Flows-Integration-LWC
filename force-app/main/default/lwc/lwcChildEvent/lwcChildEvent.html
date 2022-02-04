@@ -1,0 +1,28 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 10-24-2021
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-input 
+        label="First Name"
+        value={firstName}
+        onchange={handleFirstName}
+    ></lightning-input>
+    <lightning-input 
+        label="Last Name"
+        value={lastName}
+        onchange={handleLastName}
+    ></lightning-input>
+    <lightning-input 
+        label="Email"
+        type="email"
+        onchange={handleEmail}
+    ></lightning-input>
+    <lightning-button 
+        label="Pass Entererd information to Parent component" 
+        onclick={handleButton}
+    ></lightning-button>
+</template>

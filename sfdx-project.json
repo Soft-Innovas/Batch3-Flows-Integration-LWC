@@ -5,7 +5,9 @@
       "default": true
     }
   ],
-  "name": "SoftB3",
+
+  "name": "LWCSession",
+
   "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "52.0"

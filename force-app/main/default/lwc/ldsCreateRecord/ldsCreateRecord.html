@@ -1,0 +1,59 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 01-21-2022
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-card title="LDS CREATE OPPORTUNITY">
+        <lightning-input 
+            type="text"
+            label="Opportunity Name"
+            onchange={handleNameChange}
+            required="true"
+            name="name"
+            message-when-value-missing="Please enter opportunity name"
+        ></lightning-input>
+        <br/>
+        <lightning-combobox
+            name="stage"
+            label="Stage"
+            onchange={handleStageChange}
+            options={optionsStage}
+            required="true"
+            placeholder="Select Stage"
+            message-when-value-missing="Please select opportunity stage"
+        ></lightning-combobox>
+        <br/>
+        <lightning-input
+            type="date" 
+            name="closeDate"
+            label="Close Date"
+            required="true"
+            onchange={handleCloseDateChange}
+            message-when-value-missing="Please enter opportunity close date"
+        ></lightning-input>
+        <br/>
+        <lightning-input 
+            name="amount"
+            label="Amount"
+            formatter="currency" 
+            step="0.01"
+            type="number"
+            required="true"
+            onchange={handleAmountChange}
+            placeholder="Enter amount upto 2 decimals"
+            message-when-step-mismatch="Only 2 decimals are allowed"
+            message-when-value-missing="Please enter opportunity amount"
+        ></lightning-input>
+        <br/>
+        <lightning-button 
+            variant="brand"
+            label="Create Opportunity"
+            title="createOpp"
+            onclick={handleCreateOpp}
+            class="slds-var-m-around_x-small"
+        ></lightning-button>
+    </lightning-card>
+</template>

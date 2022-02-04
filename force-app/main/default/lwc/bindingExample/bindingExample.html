@@ -1,0 +1,22 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 10-17-2021
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <div class="myColor">
+        The contact first name is: {contact.FirstName}
+
+        <div class="slds-var-p-around_medium">
+            <lightning-input 
+                type="text" 
+                label="Enter some text" 
+                value={contact.FirstName} 
+                onchange={handleInputChange}
+            ></lightning-input>
+        </div>
+        <br/>
+    </div>
+</template>

@@ -1,0 +1,29 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 01-23-2022
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-card title="Customer Registration">
+        <div class={companyInformationClass}>
+          <c-company-information-registration 
+            onnextscreen={handleCustomerScreen}
+          ></c-company-information-registration>
+        </div>
+        <div class={customerRegistrationClass}>
+          <c-customer-registration
+            company-information-id={companyInformationId}
+            onpreviousscreen={handleCompanyInformation}
+            onnextscreen={handleLoginUserRegistration}
+          ></c-customer-registration>
+        </div>
+        <div class={loginUserRegistrationClass}>
+          <c-login-user-registration
+            onpreviousscreen={handleCustomerScreen}
+          ></c-login-user-registration>
+        </div>
+        
+    </lightning-card>
+</template>

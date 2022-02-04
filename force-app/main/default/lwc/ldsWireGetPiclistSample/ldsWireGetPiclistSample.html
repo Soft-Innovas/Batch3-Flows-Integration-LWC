@@ -1,0 +1,39 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 11-06-2021
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-card 
+        title="LDS PICKLIST Demo"
+    >
+      <lightning-combobox
+        name="recordType"
+        label="Record Type"
+        value={recordTypeValue}
+        placeholder="Select a record type"
+        options={recordTypeOptions}
+        onchange={handleRecordTypeChange}
+      ></lightning-combobox>
+      <br/>
+      <lightning-combobox
+        name="state"
+        label="State"
+        value={stateValue}
+        placeholder="Select state"
+        options={stateOptions}
+        onchange={handleStateChange}
+      ></lightning-combobox>
+      <br/>
+      <lightning-combobox
+        name="city"
+        label="City"
+        value={cityValue}
+        placeholder="Select city"
+        options={cityOptions}
+        onchange={handleCityChange}
+      ></lightning-combobox>
+    </lightning-card>
+</template>

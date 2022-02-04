@@ -1,0 +1,23 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 11-04-2021
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <lightning-card title="Toggle View">
+        <template if:true={showViewPage}>
+            <c-lds-view-form record-id={recordId} object-api-name={objectApiName}></c-lds-view-form>
+            <lightning-button label="Edit" variant="brand" onclick={handleEdit}></lightning-button>
+        </template>
+        
+        <template if:false={showViewPage}>
+            <c-lds-edit-form 
+                record-id={recordId} 
+                object-api-name={objectApiName} 
+                onrecordsave={handleView}
+            ></c-lds-edit-form>
+        </template>
+    </lightning-card>
+</template>

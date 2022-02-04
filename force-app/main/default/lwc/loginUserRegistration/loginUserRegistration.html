@@ -1,0 +1,33 @@
+<!--
+  @description       : 
+  @author            : Deepak Pal
+  @group             : 
+  @last modified on  : 01-23-2022
+  @last modified by  : Deepak Pal
+-->
+<template>
+    <div class="slds-box slds-var-m-around_x-small">
+        <h2><em>User Screen</em></h2>
+    </div>
+    <div class="slds-box slds-var-m-around_x-small">
+        <lightning-record-form 
+            record-id={recordId}
+            object-api-name={objectApiName}
+            mode="edit"
+            layout-type="Full"
+            columns="2"
+            onsubmit={handleSubmit}
+            onsuccess={handleSuccess}
+            onerror={handleError}
+        ></lightning-record-form>
+    </div>
+    <div class="slds-box slds-var-m-around_x-small">
+        <lightning-button 
+            variant="neutral" 
+            label="Previous" 
+            title="Previous" 
+            onclick={handlePrevious} 
+            class="slds-var-m-around_x-small"
+        ></lightning-button> 
+    </div>
+</template>
